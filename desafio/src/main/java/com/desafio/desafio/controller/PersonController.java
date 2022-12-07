@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.desafio.models.Person;
 import com.desafio.desafio.service.PersonService;
+import com.jayway.jsonpath.Option;
 
 import lombok.RequiredArgsConstructor;
 
@@ -69,6 +70,10 @@ public class PersonController {
         Optional<Person> personOptional = personService.findById(id);
         if (!personOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe essa pessoa no banco");
+        }
+        Optional<Person> pOptional = personService.findByEmail(person.getEmail());
+        if(pOptional.isPresent() && !pOptional.get().getEmail().equals(personOptional.get().getEmail())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email já cadastrado no banco");
         }
         BeanUtils.copyProperties(person, personOptional.get(),"id");
         personService.savePerson(personOptional.get());
