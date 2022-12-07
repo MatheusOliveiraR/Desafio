@@ -1,0 +1,6 @@
+com\desafio\desafio\controller\PersonController.class
+com\desafio\desafio\repository\PersonRepository.class
+com\desafio\desafio\service\PersonService.class
+com\desafio\desafio\DesafioApplication.class
+com\desafio\desafio\models\Person.class
+com\desafio\desafio\configurations\CorsConfiguration.class
