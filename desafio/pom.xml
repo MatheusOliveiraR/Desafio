@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>com.desafio</groupId>
 	<artifactId>desafio</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>Version 1.0</version>
 	<name>desafio</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Desafio desenvolvido para o estagio</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 
