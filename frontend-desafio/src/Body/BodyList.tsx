@@ -17,29 +17,16 @@ interface DataType {
   email: string;
   phoneNumber: string;
 }
-interface DataTypeSave {
-  name: string;
-  gender: string;
-  birthDate: string;
-  email: string;
-  phoneNumber: string;
-}
-
 type DataIndex = keyof DataType;
-
-
 const App: React.FC = () => {  
 
   const [form] = Form.useForm();
-  const [email, setEmail] = useState('')
   const { Option } = Select;
-  const [loading,setLoading] = useState(false);
   const [dataSource, setDataSource] = useState<DataType[]>([]);
   const [update, setUpdate] = useState(false);
   const [personUpdate, setPersonUpdate]= useState<any>();
 
   useEffect(() =>{
-    setLoading(true)
     axios.get("http://localhost:8080/person")
     .then(response =>{
       setDataSource(response.data)
@@ -49,8 +36,6 @@ const App: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef<InputRef>(null);
-  
-
   const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
@@ -79,19 +64,17 @@ const App: React.FC = () => {
   function handleUpdate(record: any): void { 
     setPersonUpdate({...record})
     setUpdate(true)    
-  }
-
-  
+  }  
 
   function finish(value: any){  
     axios.put("http://localhost:8080/person/"+personUpdate.id, personUpdate)
       .then(()=>{
-        alert("Atualizado com sucesso! telefone: " + personUpdate.phoneNumber)
+        alert("Atualizado com sucesso!")
         window.location.reload()
         setUpdate(false);
       })
       .catch((error)=>{
-        alert(error.response.data + " ERROR") 
+        alert(error.response.data) 
       }) 
   }
 
@@ -221,7 +204,8 @@ const App: React.FC = () => {
         <Modal title="Editando" open={update} onCancel={()=>{setUpdate(false)}}
         okButtonProps={{ style: { display: 'none' } }}
         > 
-              <Form form={form}  name = "control-hooks" onFinish={finish}>
+              <Form form={form}  onFinish={finish}>
+
                 <Form.Item label= "Nome completo" rules={[{required: true}]}>
                   <Input value={[personUpdate?.name]} onChange={(e)=>{
                     setPersonUpdate((pre: any)=>{
@@ -229,6 +213,7 @@ const App: React.FC = () => {
                     })
                   }}></Input>
                 </Form.Item>
+
                 <Form.Item label= "Genêro">
                   <Select placeholder={personUpdate?.gender}>
                   <Option value="Masculino" >Masculino</Option>
@@ -236,12 +221,14 @@ const App: React.FC = () => {
                   <Option value="Outro">Outro</Option>
                   </Select>
                 </Form.Item>
+
                 <Form.Item label = "Data de nascimento">
                   <DatePicker picker='date'
                   placeholder= {personUpdate?.birthDate}
                    format={"DD/MM/YYYY"}
                   ></DatePicker>
                 </Form.Item>
+
                 <Form.Item
                 label='email'
                 rules={[{type:'email',message: "Este email não é valido"}]}>
@@ -251,23 +238,20 @@ const App: React.FC = () => {
                     })
                   }}></Input>                  
                 </Form.Item>
+
                 <Form.Item label = "Telefone"  rules={[{type:'number'}]}>
                   <InputMask style={{borderColor:"#d9d9d9",}}
                    mask="(99) 99999-9999" value={personUpdate?.phoneNumber} onChange={(e)=>{
                     setPersonUpdate((pre: any)=>{
                       return {...pre, phoneNumber:e.target.value}
                     })
-                  }}
-                  />
-                  {/* <Input type='phone' value={[personUpdate?.phoneNumber]} onChange={(e)=>{
-                    setPersonUpdate((pre: any)=>{
-                      return {...pre, phoneNumber:e.target.value}
-                    })
-                  }}></Input> */}
+                  }}/>                  
                 </Form.Item>
+
                 <Form.Item>
                   <Button type='primary' htmlType='submit'>Salvar</Button>
                   </Form.Item>
+
               </Form>
         </Modal>
       </header>

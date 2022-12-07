@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.desafio.models.Person;
 import com.desafio.desafio.service.PersonService;
-import com.jayway.jsonpath.Option;
 
 import lombok.RequiredArgsConstructor;
 
