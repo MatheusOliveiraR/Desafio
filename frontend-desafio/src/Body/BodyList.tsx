@@ -184,7 +184,7 @@ const App: React.FC = () => {
     {
       title: "Ações",
       dataIndex:'',
-      render: (record) =>
+      render: (_, record: { key: React.Key }) =>
       dataSource.length >= 1 ? (
         <><Popconfirm title="Você tem certeza que deseja deletar essa pessoa?" onConfirm={() => handleDelete(record)}>
             <a>Deletar</a>
@@ -200,7 +200,7 @@ const App: React.FC = () => {
   return (
     <div>
       <header>
-        <Table columns={columns} dataSource={dataSource}></Table>
+        <Table columns={columns} dataSource={dataSource} rowKey={(record: { id: any; }) => record.id}></Table>
         <Modal title="Editando" open={update} onCancel={()=>{setUpdate(false)}}
         okButtonProps={{ style: { display: 'none' } }}
         > 

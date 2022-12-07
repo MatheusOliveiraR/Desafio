@@ -58,7 +58,7 @@ const App: React.FC = () => {
         <Form.Item
             name={['phoneNumber']} label="Telefone" rules={[{required: true}]}                        
         >
-            <InputMask mask="(99) 99999-9999"/>
+            <InputMask value={"(99) 99999-9999"} mask="(99) 99999-9999"/>
         </Form.Item>
         <Button type="primary" htmlType="submit">Salvar</Button>
     </Form>
