@@ -1,6 +1,6 @@
 import { Form, Button, Input, Select, DatePicker,} from 'antd'
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import InputMask from 'react-input-mask';
 
@@ -10,7 +10,7 @@ const App: React.FC = () => {
 
     const dateFormat = 'DD/MM/YYYY';    
     const [form] = Form.useForm();  
-
+    
     function finish(value: any){            
         value["birthDate"] = moment(value.birthDate).format(dateFormat)
         axios.post("http://localhost:8080/person", value)
@@ -21,8 +21,8 @@ const App: React.FC = () => {
         .catch((error)=>{
             alert(error.response.data)
         })       
-    };  
-
+    };   
+        
   return (
     <Form form= {form} onFinish={finish}>
         <Form.Item name={['name']} label= "Nome completo" rules={[{required: true}]}
@@ -58,7 +58,7 @@ const App: React.FC = () => {
         <Form.Item
             name={['phoneNumber']} label="Telefone" rules={[{required: true}]}                        
         >
-            <InputMask value={"(99) 99999-9999"} mask="(99) 99999-9999"/>
+            <InputMask  mask="(99) 99999-9999"/>
         </Form.Item>
         <Button type="primary" htmlType="submit">Salvar</Button>
     </Form>
