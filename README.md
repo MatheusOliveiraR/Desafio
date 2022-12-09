@@ -1,7 +1,7 @@
 # Desafio
 
-O banco postgres ta configurado pra rodar via docker.
-Para executar o postgres no docker basta acessar a pasta docker que esta no backend-desafio -> docker e rodar o comando
+O banco postgreSQL ta configurado pra rodar via docker.
+Para executar o banco no docker basta acessar a pasta docker que esta no backend-desafio -> docker e rodar o comando
 
 ```
 docker-compose up
