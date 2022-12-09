@@ -6,7 +6,7 @@ import React, { useRef, useState, useEffect, Key } from 'react';
 import Highlighter from 'react-highlight-words';
 import axios from 'axios'
 import Modal from 'antd/es/modal/Modal';
-import InputMask  from 'react-input-mask';
+import MaskInput  from 'react-input-mask';
 
 interface DataType {
   key: Key
@@ -240,7 +240,7 @@ const App: React.FC = () => {
                 </Form.Item>
 
                 <Form.Item label = "Telefone"  rules={[{type:'number'}]}>
-                  <InputMask style={{borderColor:"#d9d9d9",}}
+                  <MaskInput style={{borderColor:"#d9d9d9",}}
                    mask="(99) 99999-9999" value={personUpdate?.phoneNumber} onChange={(e)=>{
                     setPersonUpdate((pre: any)=>{
                       return {...pre, phoneNumber:e.target.value}

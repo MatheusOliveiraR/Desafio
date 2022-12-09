@@ -1,6 +1,6 @@
 import React from 'react';
 import {  Layout, Menu, theme } from 'antd';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import Body from './Body/BodyRegister';
 import BodyList from './Body/BodyList';
 
@@ -41,6 +41,7 @@ function Content(){
     <Routes>
       <Route path="/register" element={<div><Body/></div>}></Route> 
       <Route path="/list" element={<div><BodyList/></div>}></Route>
+      <Route path="/" element={<Navigate to="/register"/>} />
     </Routes>
   </div>
 }

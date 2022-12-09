@@ -1,8 +1,8 @@
 import { Form, Button, Input, Select, DatePicker,} from 'antd'
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent} from 'react';
 import moment from 'moment';
-import InputMask from 'react-input-mask';
+import InputMask  from 'react-input-mask';
 
 const { Option } = Select;
 
@@ -10,6 +10,9 @@ const App: React.FC = () => {
 
     const dateFormat = 'DD/MM/YYYY';    
     const [form] = Form.useForm();  
+    const [phone, setPhone] = useState("")
+
+    
     
     function finish(value: any){            
         value["birthDate"] = moment(value.birthDate).format(dateFormat)
@@ -21,8 +24,12 @@ const App: React.FC = () => {
         .catch((error)=>{
             alert(error.response.data)
         })       
-    };   
-        
+    }; 
+    
+    const onChange=(e: ChangeEvent<HTMLInputElement> )=> {
+        setPhone(e.target.value);
+    }
+            
   return (
     <Form form= {form} onFinish={finish}>
         <Form.Item name={['name']} label= "Nome completo" rules={[{required: true}]}
@@ -56,9 +63,9 @@ const App: React.FC = () => {
         </Form.Item>
 
         <Form.Item
-            name={['phoneNumber']} label="Telefone" rules={[{required: true}]}                        
+            name={['phoneNumber']} label="Telefone" rules={[{required: true}]} initialValue={{["phoneInput"]: phone}}                        
         >
-            <InputMask  mask="(99) 99999-9999"/>
+            <InputMask mask="(99) 99999-9999" name='phoneInput' onChange={onChange} />
         </Form.Item>
         <Button type="primary" htmlType="submit">Salvar</Button>
     </Form>
